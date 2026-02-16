@@ -136,21 +136,21 @@
 \newcommand{\fleurr}{{\fleurfont{}}}
 \defaultfontfeatures{Renderer=Harfbuzz}
 
-\babelfont[brazil]{rm}[Script=Latin]{Gentium Book Plus}
+\babelfont[brazil]{rm}[Script=Latin]{Brill}
 \babelfont[brazil]{sf}{Noto Sans}
 \babelfont[brazil]{tt}[Scale=0.8]{Mononoki Nerd Font}
 
-\babelfont[german]{rm}[Script=Latin]{Gentium Book Plus}
+\babelfont[german]{rm}[Script=Latin]{Brill}
 \babelfont[german]{sf}{Noto Sans}
 \babelfont[german]{tt}[Scale=0.8]{Mononoki Nerd Font}
 \babeltags{de=german}
 %
-\babelfont[english]{rm}[Script=Latin]{Gentium Book Plus}
+\babelfont[english]{rm}[Script=Latin]{Brill}
 \babelfont[english]{sf}{Noto Sans}
 \babelfont[english]{tt}[Scale=0.8]{Mononoki Nerd Font}
 
 \babelprovide[import, onchar=ids fonts letters]{ancientgreek}
-\babelfont[ancientgreek]{rm}[BoldFont=Gentium Book Plus Bold]{Brill}
+\babelfont[ancientgreek]{rm}[BoldFont=Brill Bold]{Brill}
 \babeltags{grc = ancientgreek}
 
 \babelprovide[import, onchar=ids fonts letters]{russian}
@@ -583,28 +583,6 @@
 				\par}
 			\enlargethispage{\bottafiddle}
 			\clearpage}
-}
-
-\newcommand{\colofao}[0]{
-	\pagestyle{empty}
-	\cleartoevenpage%
-	\SingleSpacing%
-	\null\vfill
-	\begin{adjustwidth}{8em}{8em}
-		\begin{flushleft}
-			\textbf{Colofão}\par
-			Esse documento foi diagramado usando o sistema de diagramação
-			\href{https://lualatex.org}{Lua\TeX} mantido por Manuel Pégourié-Gonnard.
-			As fontes utilizadas foram: \mbox{Gentium Book Plus
-				(texto latino)};
-			\mbox{\grc{Brill (texto grego)}};
-			\mbox{\ipa{Gentium Plus (complementos fonológicos)}};
-			\mbox{\syntax{Noto Sans (notação sintática e glosas)}}.
-			\mbox{O texto está em tamanho 12/14,5pt}.\par
-
-			{\today.}
-		\end{flushleft}
-	\end{adjustwidth}
 }
 
 % Citação
