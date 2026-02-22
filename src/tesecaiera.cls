@@ -5,26 +5,13 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax
 
-\LoadClass[a4paper, 11pt, twoside, openright]{memoir}
+\LoadClass[a4paper, oneside]{memoir}
 
-% set \clubpenalty, etc. to distinctive values for use
-% in tracing page breaks. These values are chosen so that
-% no single penalty will absolutely prohibit a page break, but
-% certain combinations of two or more will.
 \clubpenalty=9996
 \widowpenalty=9999
 \brokenpenalty=4991
-% Reiterate the default value of \redisplaypenalty, for
-% completeness.
-% Set postdisplaypenalty to a fairly high value to discourage a
-% page break between a display and a widow line at the end of a
-% paragraph.
 \predisplaypenalty=10000
 \postdisplaypenalty=1549
-% And then \displaywidowpenalty should be at least as high as
-% \postdisplaypenalty, otherwise in a situation where two displays
-% are separated by two lines, TeX will prefer to break between the
-% two lines, rather than before the first line.
 \displaywidowpenalty=1602
 
 % Dependências
@@ -180,43 +167,7 @@
 \babelprovide[]{linearb}
 \babelfont[linearb]{rm}[]{Noto Sans Linear B}
 
-\RequirePackage{indentfirst}
 \RequirePackage{microtype}
-
-% begin: listings
-\usepackage{listings}
-
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\lstdefinestyle{mystyle}{
-	backgroundcolor=\color{backcolour},
-	commentstyle=\color{codegreen},
-	keywordstyle=\color{magenta},
-	numberstyle=\tiny\color{codegray},
-	stringstyle=\color{codepurple},
-	basicstyle=\ttfamily\footnotesize,
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	keepspaces=true,
-	numbers=left,
-	numbersep=5pt,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	tabsize=2
-}
-\lstset{style=mystyle}
-% end: listings
-
-% Decorando bibliografia
-% \RequirePackage[backend=biber,
-% style=./biblatex/abnt-caio, language=brazil,
-% pretty, autolang=hyphen,
-% pretty, repeatfields, noslsn, natbib, extrayear
-% ]{biblatex}
 
 % Configurações para o Hyperref
 % Paleta de cores
@@ -231,18 +182,6 @@
 	filecolor=green,  % color of file links
 	urlcolor=green,
 }
-\renewcommand{\figureautorefname}{Figura}
-\renewcommand{\tableautorefname}{Tabela}
-\renewcommand{\sectionautorefname}{Seção}
-\renewcommand{\chapterautorefname}{Capítulo}
-\renewcommand{\subsectionautorefname}{Seção}
-\renewcommand{\subsubsectionautorefname}{Pipoca}
-\newcommand{\subsubsectionaname}{Seção}
-\renewcommand{\appendixpagename}{Apêndices}
-\renewcommand{\appendixtocname}{Apêndices}
-\renewcommand{\appendixname}{Apêndice}
-\renewcommand{\appendixautorefname}{Apêndice}
-\newcommand{\aref}[1]{\hyperref[#1]{Apêndice~\ref{#1}}}
 
 \newcommand{\gloss}[1]{\foreignlanguage{syntax}{\textsc{#1}}}
 \newcommand{\Sg}{\gloss{Sg}}
@@ -285,318 +224,16 @@
 \newcommand{\Inf}{\gloss{Inf}}
 \newcommand{\Conj}{\gloss{Conj}}
 \newcommand{\Particl}{\gloss{Particl}}
-\newcommand{\refcorpus}[1]{\hyperref[corp:#1]{#1}}
 \newcommand{\KG}[2]{\glsxtrshort{KG} #1 §#2}
 \newcommand{\GH}[2]{\glsxtrshort{ChantraineGH} #1 §#2}
 \newcommand{\CGG}[1]{\glsxtrshort{CGG} §#1}
 \newcommand{\SSVCG}[1]{\glsxtrshort{RijksbaronSSVCG} §#1}
 \newcommand{\CAGL}[1]{\glsxtrshort{CAGL} (p.~#1)}
 
-
-\newcounter{criterion}
-\setcounter{criterion}{0}
-\newcommand{\criterion}[1]{
-	\refstepcounter{criterion}
-	\par
-	\noindent C-\arabic{criterion}: \textit{#1}
-}
-
-
-
-% Páginas especiais
-\newlength{\linespace}
-\setlength{\linespace}{\baselineskip} % current equivalent of \onelineskip
-\newlength{\toptafiddle} \setlength{\toptafiddle}{2\linespace}
-\newlength{\bottafiddle} \setlength{\bottafiddle}{0pt}
-\newlength{\topfiddle}
-\setlength{\topfiddle}{\toptafiddle}
-\newlength{\botfiddle}
-\setlength{\botfiddle}{\onelineskip}
-
 \setlength{\footmarkwidth}{0.5em}
 \setlength{\footmarksep}{0em}
 \setlength{\footparindent}{0em}
 \footmarkstyle{\textsuperscript{#1}\hspace{0.5em}}
-
-% Variáveis
-% Comandos de dados - titulo do documento
-\newcommand{\titulo}[1]{\title{#1}}
-\newcommand{\imprimirtitulo}{\thetitle}
-
-% Comandos de dados - titulo do documento
-\providecommand{\theforeigntitle}[1]{}
-\newcommand{\tituloestrangeiro}[1]{\renewcommand{\theforeigntitle}{#1}}
-\newcommand{\imprimirtituloestrangeiro}{\theforeigntitle}
-
-% Comandos de dados - autor (use \and para multiplos autores)
-\newcommand{\autor}[1]{\author{#1}}
-\newcommand{\imprimirautor}{\@author}
-
-% Comandos de dados - data
-\let\olddate\date%
-\renewcommand{\date}[1]{\AtBeginDocument{\olddate{#1}}}
-\newcommand{\data}[1]{\date{#1}}
-\newcommand{\imprimirdata}{\thedate}
-
-% Comandos de dados - local
-\providecommand{\imprimirlocal}{}
-\newcommand{\local}[1]{\renewcommand{\imprimirlocal}{#1}}
-
-% Universidade
-\providecommand{\imprimiruniversidade}{}
-\newcommand{\universidade}[1]{%
-	\renewcommand{\imprimiruniversidade}{#1}
-}
-
-% Faculdade
-\providecommand{\imprimirfaculdade}{}
-\newcommand{\faculdade}[1]{%
-	\renewcommand{\imprimirfaculdade}{#1}
-}
-
-% Programa
-\providecommand{\imprimirprograma}{}
-\newcommand{\programa}[1]{%
-	\renewcommand{\imprimirprograma}{#1}
-}
-
-% subtitulo
-\providecommand{\imprimirsubtitulo}{}
-\newcommand{\subtitulo}[1]{%
-	\renewcommand{\imprimirsubtitulo}{#1}
-}
-
-% versao
-\providecommand{\imprimirversao}{}
-\newcommand{\versao}[1]{%
-	\renewcommand{\imprimirversao}{#1}
-}
-
-% titulacao
-\providecommand{\imprimirtitulacao}{}
-\newcommand{\titulacao}[1]{%
-	\renewcommand{\imprimirtitulacao}{#1}
-}
-
-\providecommand{\imprimirbancaA}{}
-\providecommand{\imprimirbancaATitulo}{}
-\providecommand{\imprimirbancaAInstituicao}{}
-\newcommand{\bancaA}[3]{
-	\renewcommand{\imprimirbancaATitulo}{#1}
-	\renewcommand{\imprimirbancaA}{#2}
-	\renewcommand{\imprimirbancaAInstituicao}{#3}
-}
-
-\providecommand{\imprimirbancaB}{}
-\providecommand{\imprimirbancaBTitulo}{}
-\providecommand{\imprimirbancaBInstituicao}{}
-\newcommand{\bancaB}[3]{
-	\renewcommand{\imprimirbancaBTitulo}{#1}
-	\renewcommand{\imprimirbancaB}{#2}
-	\renewcommand{\imprimirbancaBInstituicao}{#3}
-}
-
-\providecommand{\imprimirbancaC}{}
-\providecommand{\imprimirbancaCTitulo}{}
-\providecommand{\imprimirbancaCInstituicao}{}
-\newcommand{\bancaC}[3]{
-	\renewcommand{\imprimirbancaCTitulo}{#1}
-	\renewcommand{\imprimirbancaC}{#2}
-	\renewcommand{\imprimirbancaCInstituicao}{#3}
-}
-
-\providecommand{\imprimirbancaD}{}
-\providecommand{\imprimirbancaDTitulo}{}
-\providecommand{\imprimirbancaDInstituicao}{}
-\newcommand{\bancaD}[3]{
-	\renewcommand{\imprimirbancaDTitulo}{#1}
-	\renewcommand{\imprimirbancaD}{#2}
-	\renewcommand{\imprimirbancaDInstituicao}{#3}
-}
-
-\providecommand{\imprimirorientador}{}
-\providecommand{\imprimirorientadorTitulo}{}
-\providecommand{\imprimirorientadorInstituicao}{}
-\newcommand{\orientador}[3]{
-	\renewcommand{\imprimirorientadorTitulo}{#1}
-	\renewcommand{\imprimirorientador}{#2}
-	\renewcommand{\imprimirorientadorInstituicao}{#3}
-}
-
-\providecommand{\imprimirdataDefesa}{}
-\newcommand{\dataDefesa}[1]{
-	\renewcommand{\imprimirdataDefesa}{#1}
-}
-
-% Comandos de dados - tipo de trabalho
-\providecommand{\imprimirtipotrabalho}{}
-\newcommand{\tipotrabalho}[1]{\renewcommand{\imprimirtipotrabalho}{#1}}
-
-\newcommand{\capa}{
-	{%
-			\clearpage
-			\thispagestyle{empty}
-			\centering
-			\vspace*{-\toptafiddle}
-			{\scshape\large
-				\imprimiruniversidade\par
-				\imprimirfaculdade\par
-				\imprimirprograma%
-				\par
-			}
-
-			\vspace{6cm}
-			{\large \imprimirautor}\par
-			\vspace{2cm}
-			{\Large \imprimirtitulo}\par
-			\bigskip
-			{\large \imprimirsubtitulo}\par
-			\vspace{1cm}
-
-			\textbf{Versão \imprimirversao}
-			\vfill
-			{\large\scshape
-				\SingleSpacing%
-				\imprimirlocal\par\smallskip
-				\imprimirdata%
-				\par}
-			\enlargethispage{\bottafiddle}
-			\clearpage
-		}}
-
-\newcommand{\gerardescricao}[0]{%
-	\begin{minipage}{.5\textwidth}\SingleSpacing%
-		\imprimirtipotrabalho{} apresentada ao \imprimirprograma{} da
-		\imprimirfaculdade{},
-		\imprimiruniversidade{}, como exigência parcial para
-		a obtenção do título de \imprimirtitulacao{}.
-		\par
-		\vspace{1em}
-		Orientador: \mbox{\imprimirorientador}%
-		\par
-	\end{minipage} }
-
-\newcommand{\gerardescricaoB}[0]{%
-	\begin{minipage}{.5\textwidth}\SingleSpacing%
-		\imprimirtipotrabalho{} apresentada ao \imprimirprograma{} da
-		\imprimirfaculdade{},
-		\imprimiruniversidade{}, como exigência parcial para
-		a obtenção do título de \imprimirtitulacao{}.
-		\par
-	\end{minipage} }
-
-\newcommand{\folhaderosto}{
-	{%
-			\cleardoublepage%
-			\thispagestyle{empty}
-			\centering
-			\vspace*{-\toptafiddle}
-			{\scshape\large
-				\imprimirautor%
-				\par
-			}
-
-			\vspace{9cm}
-			{\Large \imprimirtitulo}\par
-			\bigskip
-			{\large \imprimirsubtitulo}\par
-			\vspace{1cm}
-			{\bfseries Versão \imprimirversao}\\
-			\vfill
-
-			{\hspace{.45\textwidth}
-				\gerardescricao{}
-			}
-			\vfill
-			{\large\scshape
-				\SingleSpacing%
-				\imprimirlocal\par\smallskip
-				\imprimirdata%
-				\par}
-			\enlargethispage{\bottafiddle}
-			\clearpage}
-}
-
-
-\newcommand{\folhaaprovacao}{
-	{%
-			\clearpage
-			\thispagestyle{empty}
-			\centering
-			\vspace*{-\toptafiddle}
-			{\scshape\large
-				\imprimirautor%
-				\par
-			}
-
-			\vspace{2em}
-			{\Large \imprimirtitulo}\par
-			\smallskip
-			{\large \imprimirsubtitulo}\par
-			\vspace{1em}
-			{\hspace{.45\textwidth}
-				\gerardescricaoB{}
-				\vspace{1em}
-
-				Trabalho aprovado.\ \imprimirlocal, \imprimirdataDefesa{}.\par\vspace{4em}
-
-				{
-					\SingleSpacing%
-					\hrule
-					\vspace{1.5mm}
-					\textbf{\imprimirorientadorTitulo{} \imprimirorientador{}}\\\smallskip
-					Orientador{}
-
-					\vspace{4em}
-					\hrule
-					\vspace{1.5mm}
-					\textbf{\imprimirbancaATitulo{} \imprimirbancaA{}} \\\smallskip
-					\imprimirbancaAInstituicao{}
-
-					\vspace{4em}
-					\hrule
-					\vspace{1.5mm}
-					\textbf{\imprimirbancaBTitulo{} \imprimirbancaB{}} \\\smallskip
-					\imprimirbancaBInstituicao{}
-
-					\vspace{4em}
-					\hrule
-					\vspace{1.5mm}
-					\textbf{\imprimirbancaCTitulo{} \imprimirbancaC{}} \\\smallskip
-					\imprimirbancaCInstituicao{}
-
-					\vspace{4em}
-					\hrule
-					\vspace{1.5mm}
-					\textbf{\imprimirbancaDTitulo{} \imprimirbancaD{}} \\\smallskip
-					\imprimirbancaDInstituicao{}
-				}
-			}
-
-			\vfill
-			{\large\scshape
-				\SingleSpacing%
-				\imprimirlocal%
-				\par
-				\smallskip
-				\imprimirdata%
-				\par}
-			\enlargethispage{\bottafiddle}
-			\clearpage}
-}
-
-% Citação
-\RequirePackage{scrextend}
-\newenvironment{citacao}{
-	\SingleSpacing%
-	\begin{addmargin}[4cm]{0em}
-		\small
-		}{
-	\end{addmargin}
-	\bigskip
-	\DoubleSpacing%
-}
-
 
 % Glossário
 \let\printindex\undefined
